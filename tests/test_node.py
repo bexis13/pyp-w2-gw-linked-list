@@ -13,14 +13,6 @@ class NodeTestCase(unittest.TestCase):
         n = Node(9)
         n.tail = Node('X')
         self.assertEqual(str(n), "Node(9) > Node(X)")
-        
-    def test_node_str_representation_with_tail_with_tail(self):
-        n1 = Node(1)
-        n2 = Node(2)
-        n3 = Node(3)
-        n1.tail = n2
-        n2.tail = n3
-        self.assertEqual(str(n1), 'Node(1) > Node(2) > Node(3)')
 
     def test_node_equal_value(self):
         self.assertEqual(Node(1), Node(1))

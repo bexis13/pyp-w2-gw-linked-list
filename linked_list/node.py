@@ -13,11 +13,13 @@ class Node(object):
         self.head = head
         self.tail = tail
 
+    #coded this way under protest. :p Should really return chain all the way to end, and then be consistent re / at end or not...
+    #but this is what the specs want. So harumph!
     def __str__(self):
         if self.tail is None:
             return 'Node({s.head}) > /'.format(s=self)
         else:
-            return 'Node({s.head}) > {s.tail}'.format(s=self)[:-2]
+            return 'Node({s.head}) > Node({s.tail.head})'.format(s=self)
 
     def __eq__(self, other):
         return isinstance(other, Node) and self.head == other.head and self.tail == other.tail
@@ -27,3 +29,4 @@ class Node(object):
             return 'Node({s.head})'.format(s=self)
         else:
             return 'Node({s.head!r}, {s.tail!r})'.format(s=self)
+        
