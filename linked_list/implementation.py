@@ -33,6 +33,8 @@ class LinkedList(AbstractLinkedList):
                 yield node.head
 
     def __getitem__(self, index):
+        """
+        This lets you do a_linked_list[5] and retreive the desired item"""
         if not isinstance(index, int) or index < 0:
             raise IndexError('Expected nonnegative int, got {}'.format(index))
         if self.start is None:
@@ -44,9 +46,15 @@ class LinkedList(AbstractLinkedList):
             raise IndexError('Linked list smaller than index')
 
     def __add__(self, other):
+        """
+        This lets is do stuff like linkedlist1 + linkedlist2
+        """
         return LinkedList(chain(self, other))
 
     def __iadd__(self, other):
+        """
+        interprets += very mutation for LinkedLists :) (this is evil, muahahahahaha)
+        """
         if self.start is None:
             self.start = other.start
             self.end = other.end
@@ -56,9 +64,15 @@ class LinkedList(AbstractLinkedList):
         return self
 
     def __eq__(self, other):
+        """
+        lets us test linkedlist1 == linkedlist2
+        """
         return isinstance(other,LinkedList) and self.start == other.start
     
     def __ne__(self, other):
+        """
+        implements linkedlist1 != linkedlist2
+        """
         return not self == other
 
     def append(self, elem):
@@ -91,7 +105,7 @@ class LinkedList(AbstractLinkedList):
                 if node.tail.tail is None:
                     res = node.tail.head
                     node.tail = None
-                    self.end = None
+                    self.end = node
                     return res
         else:
             for i,node in enumerate(self.start):

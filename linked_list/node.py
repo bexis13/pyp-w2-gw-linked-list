@@ -25,8 +25,10 @@ class Node(object):
         return isinstance(other, Node) and self.head == other.head and self.tail == other.tail
 
     def __repr__(self):
-        if self.tail is None:
+        if self.tail is None: 
             return 'Node({s.head})'.format(s=self)
         else:
             return 'Node({s.head!r}, {s.tail!r})'.format(s=self)
-        
+    
+    
+    #a chain with 3 nodes: Node(1,Node(2,Node(3)))
