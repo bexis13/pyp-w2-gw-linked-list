@@ -27,30 +27,30 @@ class LinkedListTestCase(unittest.TestCase):
         l1 = LinkedList([1, 2, 3])
 
         self.assertTrue(l1.start is not None)
-        self.assertEqual(l1.start.elem, 1)
+        self.assertEqual(l1.start.head, 1)
 
         self.assertTrue(l1.end is not None)
-        self.assertEqual(l1.end.elem, 3)
+        self.assertEqual(l1.end.head, 3)
 
-        self.assertTrue(l1.start.next is not None)
-        self.assertEqual(l1.start.next.elem, 2)
+        self.assertTrue(l1.start.tail is not None)
+        self.assertEqual(l1.start.tail.head, 2)
 
-        self.assertTrue(l1.start.next.next is not None)
-        self.assertEqual(l1.start.next.next.elem, 3)
+        self.assertTrue(l1.start.tail.tail is not None)
+        self.assertEqual(l1.start.tail.tail.head, 3)
 
     def test_append(self):
         my_list = LinkedList()
 
         my_list.append(1)
-        self.assertEqual(my_list.start.elem, 1)
-        self.assertEqual(my_list.start.next, None)
+        self.assertEqual(my_list.start.head, 1)
+        self.assertEqual(my_list.start.tail, None)
         self.assertEqual(my_list, LinkedList([1]))
 
         my_list.append(2)
-        self.assertEqual(my_list.start.elem, 1)
-        self.assertEqual(my_list.start.next, Node(2))
-        self.assertEqual(my_list.start.next.elem, 2)
-        self.assertEqual(my_list.start.next.next, None)
+        self.assertEqual(my_list.start.head, 1)
+        self.assertEqual(my_list.start.tail, Node(2))
+        self.assertEqual(my_list.start.tail.head, 2)
+        self.assertEqual(my_list.start.tail.tail, None)
 
         self.assertEqual(my_list.count(), 2)
 
@@ -60,54 +60,54 @@ class LinkedListTestCase(unittest.TestCase):
     def test_pop_removes_last_item_by_default(self):
         l1 = LinkedList([1, 2, 3])
 
-        elem = l1.pop()
-        self.assertEqual(elem, 3)
+        head = l1.pop()
+        self.assertEqual(head, 3)
         self.assertEqual(l1.count(), 2)
         self.assertEqual(l1, LinkedList([1, 2]))
 
     def test_pop_removes_first_item(self):
         l1 = LinkedList([1, 2, 3])
 
-        elem = l1.pop(0)
-        self.assertEqual(elem, 1)
+        head = l1.pop(0)
+        self.assertEqual(head, 1)
         self.assertEqual(l1.count(), 2)
         self.assertEqual(l1, LinkedList([2, 3]))
 
     def test_pop_removes_last_item(self):
         l1 = LinkedList([1, 2, 3])
 
-        elem = l1.pop(2)
-        self.assertEqual(elem, 3)
+        head = l1.pop(2)
+        self.assertEqual(head, 3)
         self.assertEqual(l1.count(), 2)
         self.assertEqual(l1, LinkedList([1, 2]))
 
     def test_pop_removes_item_in_the_middle_of_the_list(self):
         l1 = LinkedList([1, 2, 3, 4, 5])
 
-        elem = l1.pop(2)
-        self.assertEqual(elem, 3)
+        head = l1.pop(2)
+        self.assertEqual(head, 3)
         self.assertEqual(l1.count(), 4)
         self.assertEqual(l1, LinkedList([1, 2, 4, 5]))
 
-        elem = l1.pop(1)
-        self.assertEqual(elem, 2)
+        head = l1.pop(1)
+        self.assertEqual(head, 2)
         self.assertEqual(l1.count(), 3)
         self.assertEqual(l1, LinkedList([1, 4, 5]))
 
-    def test_pop_with_a_single_element_list(self):
+    def test_pop_with_a_single_headent_list(self):
         # Default index
         l1 = LinkedList([9])
 
-        elem = l1.pop()
-        self.assertEqual(elem, 9)
+        head = l1.pop()
+        self.assertEqual(head, 9)
         self.assertEqual(l1.count(), 0)
         self.assertEqual(l1, LinkedList([]))
 
         # index == 0
         l1 = LinkedList([9])
 
-        elem = l1.pop(0)
-        self.assertEqual(elem, 9)
+        head = l1.pop(0)
+        self.assertEqual(head, 9)
         self.assertEqual(l1.count(), 0)
         self.assertEqual(l1, LinkedList([]))
 

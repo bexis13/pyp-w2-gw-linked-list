@@ -6,13 +6,21 @@ from linked_list import Node
 
 class NodeTestCase(unittest.TestCase):
 
-    def test_node_str_representation_without_next(self):
+    def test_node_str_representation_without_tail(self):
         self.assertEqual(str(Node(9)), "Node(9) > /")
 
-    def test_node_str_representation_with_next(self):
+    def test_node_str_representation_with_tail(self):
         n = Node(9)
-        n.next = Node('X')
+        n.tail = Node('X')
         self.assertEqual(str(n), "Node(9) > Node(X)")
+        
+    def test_node_str_representation_with_tail_with_tail(self):
+        n1 = Node(1)
+        n2 = Node(2)
+        n3 = Node(3)
+        n1.tail = n2
+        n2.tail = n3
+        self.assertEqual(str(n1), 'Node(1) > Node(2) > Node(3)')
 
     def test_node_equal_value(self):
         self.assertEqual(Node(1), Node(1))
@@ -26,12 +34,12 @@ class NodeTestCase(unittest.TestCase):
         self.assertNotEqual(Node(True), Node(False))
         self.assertNotEqual(Node([1, 2, 3]), Node([3, 2, 1]))
 
-    def test_node_equal_value_different_next_node(self):
-        self.assertNotEqual(Node(1, next=Node('next1')),
-                            Node(1, next=Node('next2')))
-        self.assertNotEqual(Node('hello', next=Node('next1')),
-                            Node('hello', next=Node('next2')))
-        self.assertNotEqual(Node(True, next=Node('next1')),
-                            Node(True, next=Node('next2')))
-        self.assertNotEqual(Node([1, 2, 3], next=Node('next1')),
-                            Node([1, 2, 3], next=Node('next2')))
+    def test_node_equal_value_different_tail_node(self):
+        self.assertNotEqual(Node(1, tail=Node('tail1')),
+                            Node(1, tail=Node('tail2')))
+        self.assertNotEqual(Node('hello', tail=Node('tail1')),
+                            Node('hello', tail=Node('tail2')))
+        self.assertNotEqual(Node(True, tail=Node('tail1')),
+                            Node(True, tail=Node('tail2')))
+        self.assertNotEqual(Node([1, 2, 3], tail=Node('tail1')),
+                            Node([1, 2, 3], tail=Node('tail2')))
